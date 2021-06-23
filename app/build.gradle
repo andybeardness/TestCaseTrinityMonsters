@@ -32,6 +32,8 @@ android {
     }
 }
 
+apply plugin: 'kotlin-kapt'
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -42,4 +44,29 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+
+    // Retro
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+
+    // GSON
+    implementation 'com.google.code.gson:gson:2.8.7'
+
+    // RX
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+
+    // Paging
+    implementation("androidx.paging:paging-runtime:3.0.0")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.3.0")
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    kapt("androidx.room:room-compiler:2.3.0")
+
 }

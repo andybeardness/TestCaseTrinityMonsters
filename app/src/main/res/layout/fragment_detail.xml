@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/pokemon_art"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/pokemon_art_plug"/>
+
+    <TextView
+        android:id="@+id/pokemon_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/pokemon_art"
+        tools:text="Pokemon name here" />
+
+    <TextView
+        android:id="@+id/pokemon_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/pokemon_name"
+        tools:text="Pokemon weight"/>
+
+    <TextView
+        android:id="@+id/pokemon_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/pokemon_weight"
+        tools:text="Pokemon height"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
