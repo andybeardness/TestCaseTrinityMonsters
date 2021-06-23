@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import andy.beardness.testcasetrinitymosters.R
 import andy.beardness.testcasetrinitymosters.adapter.PokemonAdapter
 import andy.beardness.testcasetrinitymosters.constant.API
@@ -25,7 +23,6 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import retrofit2.http.PATCH
 import java.lang.Exception
 
 class FragmentList : Fragment() {
@@ -46,11 +43,9 @@ class FragmentList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         recycler = view.findViewById(R.id.recycler)
-        recycler.layoutManager = LinearLayoutManager(view.context)
 
+        // DB BLOCK ---------------------------------
         val db = Room.databaseBuilder(
             view.context,
             PokemonDB::class.java,
@@ -58,7 +53,9 @@ class FragmentList : Fragment() {
         ).allowMainThreadQueries().build()
 
         val pokemonDAO = db.pokemonDAO()
+        // ------------------------------------------
 
+        // RETROFIT BLOCK ---------------------------
         val retrofit: Retrofit =
             Retrofit
                 .Builder()
@@ -67,42 +64,33 @@ class FragmentList : Fragment() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-        try {
-            val pokemonRetro: PokemonRetro = retrofit.create(PokemonRetro::class.java)
-            val call: Call<PokemonList> = pokemonRetro.getPokemons(pageCount, pageLimit)
-            call.enqueue(object : Callback<PokemonList> {
-                override fun onResponse(call: Call<PokemonList>, response: Response<PokemonList>) {
-                    if (response.isSuccessful) {
-                        val pokemonList: PokemonList = response.body()!!
-                        Observable.just(pokemonDAO)
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe {
-                                it.insert(pokemonList.results)
-                                recycler.adapter = PokemonAdapter(pokemonList.results)
-                            }
-                        Log.d("ABC", pokemonList.results.toString())
-                    }
-                }
+        val pokemonRetro: PokemonRetro = retrofit.create(PokemonRetro::class.java)
+        val call: Call<PokemonList> = pokemonRetro.getPokemons(pageCount, pageLimit)
+        // ------------------------------------------
 
-                override fun onFailure(call: Call<PokemonList>, t: Throwable) {
-                    Log.d("ABC", "onFailure")
-                    Observable.just(pokemonDAO)
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnError {
-                            Log.d("ABC", "Throw" + it.message)
-                        }
-                        .subscribe {
-                            val pokemons = it.getAll()
+        // RX BLOCK ---------------------------------
+        Observable.just(pokemonDAO)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                call.enqueue(object : Callback<PokemonList> {
+                    override fun onResponse(
+                        call: Call<PokemonList>,
+                        response: Response<PokemonList>
+                    ) {
+                        if (response.isSuccessful) {
+                            val pokemons = response.body()!!.results
+                            it.insert(pokemons)
                             recycler.adapter = PokemonAdapter(pokemons)
-                            Log.d("ABC", "pokemons = ${pokemons}")
                         }
-                }
-            })
-        } catch (e: Exception) {
+                    }
 
-        }
-
+                    override fun onFailure(call: Call<PokemonList>, t: Throwable) {
+                        val pokemons = it.getAll()
+                        recycler.adapter = PokemonAdapter(pokemons)
+                    }
+                })
+            }
+        // ------------------------------------------
     }
 }

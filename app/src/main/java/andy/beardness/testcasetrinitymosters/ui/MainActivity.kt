@@ -2,12 +2,9 @@ package andy.beardness.testcasetrinitymosters.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import andy.beardness.testcasetrinitymosters.R
 
 class MainActivity : AppCompatActivity() {
-
-    val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

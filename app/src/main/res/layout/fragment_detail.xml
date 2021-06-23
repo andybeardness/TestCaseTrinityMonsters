@@ -9,31 +9,25 @@
         android:id="@+id/pokemon_art"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/pokemon_art_plug"/>
+        android:src="@drawable/item_pokeball"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/pokemon_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textSize="@dimen/detail_name_size"
         app:layout_constraintTop_toBottomOf="@id/pokemon_art"
         tools:text="Pokemon name here" />
 
     <TextView
-        android:id="@+id/pokemon_weight"
+        android:id="@+id/pokemon_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textSize="@dimen/detail_url_size"
         app:layout_constraintTop_toBottomOf="@id/pokemon_name"
-        tools:text="Pokemon weight"/>
-
-    <TextView
-        android:id="@+id/pokemon_height"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/pokemon_weight"
-        tools:text="Pokemon height"/>
+        tools:text="Pokemon url" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

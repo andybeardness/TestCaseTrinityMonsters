@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TestCaseTrinityMosters</string>
+    <string name="list_item_show_it_text">Show it</string>
+    <string name="main_button_text">Show list</string>
 </resources>

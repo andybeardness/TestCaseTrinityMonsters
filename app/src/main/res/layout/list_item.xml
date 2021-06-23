@@ -8,36 +8,35 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="24dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="4dp"
-        android:background="@drawable/background_list_item">
+        android:background="@drawable/background_list_item"
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/list_item_pokemon_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/under_text_light"
             android:paddingHorizontal="8dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/list_item_name_size"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/under_text_light"
-            tools:text="Pokemon name"
-            android:textColor="@color/black"
-            android:textSize="24sp"/>
+            tools:text="Pokemon name" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingHorizontal="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:background="@color/under_text_light"
-            android:text="Show it"
+            android:paddingHorizontal="4dp"
+            android:text="@string/list_item_show_it_text"
             android:textColor="@color/black"
-            android:textSize="16dp"
-            />
+            android:textSize="@dimen/list_item_show_it_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

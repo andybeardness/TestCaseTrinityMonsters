@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_item_name_size">24sp</dimen>
+    <dimen name="list_item_show_it_size">16sp</dimen>
+    <dimen name="detail_name_size">32sp</dimen>
+    <dimen name="detail_url_size">20sp</dimen>
+</resources>

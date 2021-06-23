@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.room.Room
 import andy.beardness.testcasetrinitymosters.R
-import andy.beardness.testcasetrinitymosters.room.PokemonDB
 
 class FragmentDetail : Fragment() {
 
@@ -23,16 +21,10 @@ class FragmentDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val room = Room.databaseBuilder(
-            view.context,
-            PokemonDB::class.java,
-            "pokemon"
-        ).build()
-
         val name = arguments?.getString("name")
         val url = arguments?.getString("url")
 
         view.findViewById<TextView>(R.id.pokemon_name).text = name
-        view.findViewById<TextView>(R.id.pokemon_weight).text = url
+        view.findViewById<TextView>(R.id.pokemon_url).text = url
     }
 }

@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import andy.beardness.testcasetrinitymosters.model.Pokemon
-import javax.sql.DataSource
 
 @Dao
 interface PokemonDAO {
